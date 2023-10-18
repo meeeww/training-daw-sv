@@ -1,15 +1,27 @@
-window.onload = function() {
-    console.log(document.main_form.elements)
+window.onload = function () {
+  document.getElementById("submit").disabled = true;
+  document.getElementById("opciones").disabled = true;
 
-    console.log(document.getElementById('pregunta_si').value)
-    console.log(document.getElementById('pregunta_si').checked)
+  document.getElementById("pregunta_si").onchange = comprobarFirstCheck;
+  document.getElementById("pregunta_no").onchange = comprobarFirstCheck;
+  document.getElementById("pregunta_nsnc").onchange = comprobarFirstCheck;
 
-    document.getElementById('pregunta_si').onchange = changeValue
-    document.getElementById('pregunta_no').onchange = changeValue
+  document.getElementById("condiciones").onchange = comprobarAmbosMarcados;
+  document.getElementById("privacidad").onchange = comprobarAmbosMarcados;
+};
 
-    
+function comprobarAmbosMarcados() {
+  if (document.getElementById("condiciones").checked && document.getElementById("privacidad").checked) {
+    document.getElementById("submit").disabled = false;
+  } else {
+    document.getElementById("submit").disabled = true;
+  }
 }
 
-function changeValue(e) {
-     console.log('changed' + e.target.value)
+function comprobarFirstCheck() {
+  if (document.getElementById("pregunta_si").checked) {
+    document.getElementById("opciones").disabled = false;
+  } else {
+    document.getElementById("opciones").disabled = true;
+  }
 }
